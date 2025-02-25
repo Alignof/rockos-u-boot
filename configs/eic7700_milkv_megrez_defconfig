@@ -26,6 +26,7 @@ CONFIG_AUTOBOOT_KEYED_CTRLC=y
 CONFIG_OF_BOARD_SETUP=y
 CONFIG_USE_PREBOOT=y
 CONFIG_PREBOOT="setenv fdt_addr ${fdtcontroladdr};fdt addr ${fdtcontroladdr};usb start;sata init;nvme scan"
+CONFIG_BOOTCOMMAND="bdinfo; setenv fdt_addr ${fdtcontroladdr}; fdt addr ${fdtcontroladdr}; usb start; sata init; nvme scan; load usb 0 0x80800000 /hikami.elf; bootelf 0x80800000"
 CONFIG_DEFAULT_FDT_FILE="eswin/eic7700-milkv-megrez.dtb"
 CONFIG_DISPLAY_CPUINFO=y
 CONFIG_DISPLAY_BOARDINFO=y
