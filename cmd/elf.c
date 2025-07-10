@@ -78,9 +78,9 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 	flush();
 
     // Overwrite arguments to (hart_id, fdt_addr)
-    if (argc == 1 || argv == NULL) {
+    if (argc == 0 || argv == NULL) {
         argc = gd->arch.boot_hart;
-        argv = gd->arch.firmware_fdt_addr;
+        argv = gd->fdt_blob;
     }
 
 	/*

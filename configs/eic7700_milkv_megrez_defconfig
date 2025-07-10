@@ -24,6 +24,7 @@ CONFIG_AUTOBOOT_KEYED=y
 CONFIG_AUTOBOOT_STOP_STR="s"
 CONFIG_AUTOBOOT_KEYED_CTRLC=y
 CONFIG_OF_BOARD_SETUP=y
+CONFIG_DEBUG_UART=y
 CONFIG_USE_PREBOOT=y
 CONFIG_PREBOOT="setenv autostart yes;setenv fdt_addr ${fdtcontroladdr};fdt addr ${fdtcontroladdr};usb start;sata init;nvme scan"
 CONFIG_BOOTCOMMAND="bdinfo; print bootcmd; load usb 0 0x100000000 /hikami.elf; bootelf 0x100000000"
