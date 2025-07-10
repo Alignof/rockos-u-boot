@@ -13,12 +13,15 @@
 #include <log.h>
 #include <net.h>
 #include <vxworks.h>
+#include <asm/global_data.h>
 #ifdef CONFIG_X86
 #include <vesa.h>
 #include <asm/cache.h>
 #include <asm/e820.h>
 #include <linux/linkage.h>
 #endif
+
+DECLARE_GLOBAL_DATA_PTR;
 
 /* Allow ports to override the default behavior */
 static unsigned long do_bootelf_exec(ulong (*entry)(int, char * const[]),
@@ -73,6 +76,12 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 
 	printf("## Starting application at 0x%08lx ...\n", addr);
 	flush();
+
+    // Overwrite arguments to (hart_id, fdt_addr)
+    if (argc == 1 || argv == NULL) {
+        argc = gd->arch.boot_hart;
+        argv = gd->arch.firmware_fdt_addr;
+    }
 
 	/*
 	 * pass address parameter as argv[0] (aka command name),
