@@ -1,0 +1,21 @@
+[config]
+skip_core_tasks = true
+
+[tasks.default]
+# Make the 'build' task the default when running just 'cargo make'.
+alias = "install"
+
+[tasks.build]
+description = "Build u-boot binary"
+script = '''
+    make eic7700_milkv_megrez_defconfig
+    make -j$(nproc)
+'''
+
+[tasks.install]
+description = "Copy built binary to the third bootloader directory"
+script = '''
+    cp u-boot.bin ../rockos-opensbi/
+    cp u-boot.dtb ../rockos-opensbi/
+'''
+dependencies = ["build"]
